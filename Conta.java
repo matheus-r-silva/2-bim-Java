@@ -72,7 +72,7 @@ class ContaCorrente extends Conta{
 	 * 
 	 * @param valor*/
 	public void sacar(double valor) {
-		if(valor != 0 && getSaldo() >= valor) {
+		if(valor >= 0 && getSaldo() >= valor) {
 			alterarSaldo(-valor);
 			System.out.println("Saque de R$" + valor + " realizado");
 		}else {
