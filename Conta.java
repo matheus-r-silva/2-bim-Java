@@ -1,11 +1,19 @@
 package abstracao.encaps;
 
 //Classe abstrata conta
+/**
+ * @author Matheus Rocha
+ * @author Isabela Aquino
+ * 
+ */
 
+/* Conta é uma abstração por obter características mais pertinentes sobre si mesma*/
 abstract class Conta {
+	
+	/* campos de instância privados para prevenir que sejam acessados e mudados através de metodos que não sejam
+	 * da propria classe*/
 	private String titular;
-	private double saldo;
-	private double valor;
+	private double saldo; // Caso fosse (public) poderia ser acessado e chamado no programa sem a necessidade de Getters e Setters
 	
 	
 	public Conta() {
@@ -15,11 +23,13 @@ abstract class Conta {
 	public Conta(String titular, double saldo, double valor) {
 		this.titular = titular;
 		this.saldo = 0.0;
-		this.valor = 0.0;
+	
 	}
 	
 	
 	// Encapsulamento: Metodos para acessar atributos privados
+	
+	/* Metodos acessores e mutadores para interagirem com os campos privados*/
 	public String getTitular() {
 		return titular;
 	}
@@ -31,24 +41,26 @@ abstract class Conta {
 	
 	// metodo protegido, acessado somente pela subclasse
 	protected void alterarSaldo(double valor) {
-		this.valor += valor;
+		this.saldo += valor;
 	}
 	
+	public String toString() {
+		return "Titular: " + getTitular() + " Saldo: " + getSaldo();
+	}
 	
 	public abstract void depositar(double valor);
 	public abstract void sacar(double valor);
-	
-	
 }
 
 
 //Classe concreta que implementa os metodos abstratos
 class ContaCorrente extends Conta{
-	
 	public ContaCorrente(String titular) {
 		super();
 	}
 	
+	/**
+	 * @param valor*/
 	public void depositar(double valor) {
 		if(valor > 0) {
 			alterarSaldo(valor);
@@ -56,7 +68,9 @@ class ContaCorrente extends Conta{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param valor*/
 	public void sacar(double valor) {
 		if(valor != 0 && getSaldo() >= valor) {
 			alterarSaldo(-valor);
@@ -68,13 +82,3 @@ class ContaCorrente extends Conta{
 }
 
 
-//Classe principal
-class BancoApp{
-	public static void main(String[] args) {
-		var conta = new ContaCorrente("Davi");
-		conta.depositar(1000);
-		conta.sacar(250);
-		
-		System.out.println("Titular: " + conta.getTitular() + " e saldo" + conta.getSaldo());
-	}
-}
