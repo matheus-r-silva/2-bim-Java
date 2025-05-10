@@ -1,5 +1,3 @@
-package abstracao.encaps;
-
 //Classe abstrata conta
 /**
  * @author Matheus Rocha
@@ -44,10 +42,6 @@ abstract class Conta {
 		this.saldo += valor;
 	}
 	
-	public String toString() {
-		return "Titular: " + getTitular() + " Saldo: " + getSaldo();
-	}
-	
 	public abstract void depositar(double valor);
 	public abstract void sacar(double valor);
 }
@@ -55,7 +49,7 @@ abstract class Conta {
 
 //Classe concreta que implementa os metodos abstratos
 class ContaCorrente extends Conta{
-	public ContaCorrente(String titular) {
+	public ContaCorrente(String titual, double saldo) {
 		super();
 	}
 	
@@ -79,6 +73,8 @@ class ContaCorrente extends Conta{
 			System.out.println("Saldo insuficiente");
 		}
 	}
+	
+	public String toString() {
+		return "Titular: " + getTitular() + " Saldo: R$" + getSaldo();
+	}
 }
-
-
