@@ -3,8 +3,8 @@ public class TesteContas {
 	 * executando metodos de depositar e sacar e ao final apresentando como saida o resultado
 	 * das operações*/
 	public static void main(String[] args) {
-		var conta = new ContaCorrente("Davi");
-		conta.depositar(1000);
+		var conta = new ContaCorrente("Jonas", 1500);
+		conta.depositar(1500);
 		conta.sacar(250);
 		
 		System.out.println(conta.toString());
