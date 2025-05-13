@@ -5,6 +5,18 @@
  * 
  */
 
+/*
+3. Desafio (opcional):
+Implemente uma nova classe chamada ContaPoupanca, herdando de Conta, que:
+
+Permita depósito.
+
+Permita saque apenas se o saldo for maior que R$ 500.
+
+Exiba mensagens adequadas no terminal.
+*/
+
+
 /* Conta é uma abstração por obter características mais pertinentes sobre si mesma*/
 abstract class Conta {
 	
