@@ -5,18 +5,6 @@
  * 
  */
 
-/*
-3. Desafio (opcional):
-Implemente uma nova classe chamada ContaPoupanca, herdando de Conta, que:
-
-Permita depósito.
-
-Permita saque apenas se o saldo for maior que R$ 500.
-
-Exiba mensagens adequadas no terminal.
-*/
-
-
 /* Conta é uma abstração por obter características mais pertinentes sobre si mesma*/
 abstract class Conta {
 	
@@ -30,9 +18,9 @@ abstract class Conta {
 		
 	}
 	
-	public Conta(String titular, double saldo, double valor) {
+	public Conta(String titular, double saldo) {
 		this.titular = titular;
-		this.saldo = 0.0;
+		this.saldo = saldo;
 	
 	}
 	
@@ -44,9 +32,11 @@ abstract class Conta {
 		return titular;
 	}
 	
+
 	public double getSaldo() {
 		return saldo;
 	}
+	
 	
 	
 	// metodo protegido, acessado somente pela subclasse
@@ -54,15 +44,22 @@ abstract class Conta {
 		this.saldo += valor;
 	}
 	
+	// metodos abstratos
 	public abstract void depositar(double valor);
 	public abstract void sacar(double valor);
+	
+	// metodo para formatar representação de saida de String
+	@Override
+	public String toString() {
+		return "Titular: " + this.titular + " Saldo: R$" + this.saldo; 
+	}
 }
 
 
 //Classe concreta que implementa os metodos abstratos
 class ContaCorrente extends Conta{
-	public ContaCorrente(String titual, double saldo) {
-		super();
+	public ContaCorrente(String titular) {
+		super(titular, 0.0);
 	}
 	
 	/**
@@ -80,13 +77,43 @@ class ContaCorrente extends Conta{
 	public void sacar(double valor) {
 		if(valor >= 0 && getSaldo() >= valor) {
 			alterarSaldo(-valor);
-			System.out.println("Saque de R$" + valor + " realizado");
+			System.out.println("Saque de R$" + valor + " realizado\n");
 		}else {
 			System.out.println("Saldo insuficiente");
 		}
 	}
 	
-	public String toString() {
-		return "Titular: " + getTitular() + " Saldo: R$" + getSaldo();
-	}
+	
 }
+
+
+class ContaPoupanca extends Conta{
+	public ContaPoupanca(String titular) {
+		super(titular, 0.0);
+	}
+	
+	/**
+	 * @param valor*/
+	public void depositar(double valor) {
+		if(valor > 0) {
+			alterarSaldo(valor);
+			System.out.println("Deposito de R$" + valor + " realizado\n");
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param valor*/
+	public void sacar(double valor) {
+		if(valor >= 0 && getSaldo() >= 500) {
+			alterarSaldo(-valor);
+			System.out.println("Saque de R$" + valor + " realizado\n");
+		}else {
+			System.out.println("Saldo insuficiente\n");
+		}
+	}
+	
+}
+
+
